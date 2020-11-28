@@ -1,11 +1,15 @@
 package mx.edu.utez.apikanban.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 
@@ -20,16 +24,17 @@ public class ProductBacklogEntity {
 	private String funcionality;
 	private int priority;
 	private int status;
-	
+	private Date statusDate= new Date(); 
 	@ManyToOne
     private ProjectEntity project;
 	@ManyToOne
     private ScrumTeamEntity developer;
 	
-	
+	@JsonBackReference
 	public ProjectEntity getProject() {
 		return project;
 	}
+	
 	public ScrumTeamEntity getDeveloper() {
 		return developer;
 	}
@@ -45,6 +50,15 @@ public class ProductBacklogEntity {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	public Date getStatusDate() {
+		return statusDate;
+	}
+
+	public void setStatusDate(Date statusDate) {
+		this.statusDate = statusDate;
+	}
+
 	public String getCode() {
 		return code;
 	}

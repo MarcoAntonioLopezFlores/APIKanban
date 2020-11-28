@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "Project")
 public class ProjectEntity {
@@ -40,25 +42,20 @@ public class ProjectEntity {
 	@OneToMany(mappedBy = "project", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<ScrumTeamEntity> members;
 	
+	
 	public ProjectEntity() {
 		this.products = new ArrayList<ProductBacklogEntity>();
 		this.members = new ArrayList<ScrumTeamEntity>();
 	}
 	
+	@JsonManagedReference
 	public List<ProductBacklogEntity> getProducts() {
 		return products;
 	}
 
-	public void setProducts(List<ProductBacklogEntity> products) {
-		this.products = products;
-	}
-
+	@JsonManagedReference
 	public List<ScrumTeamEntity> getMembers() {
 		return members;
-	}
-
-	public void setMembers(List<ScrumTeamEntity> members) {
-		this.members = members;
 	}
 
 	public Date getStatusDate() {

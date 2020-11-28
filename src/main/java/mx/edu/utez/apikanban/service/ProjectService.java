@@ -23,6 +23,10 @@ public class ProjectService {
 		return projectRepository.findAll();
 	}
 	
+	public ProjectEntity getOneProject(Long id){
+		return projectRepository.findById(id).get();
+	}
+	
 	
 	public ProjectEntity saveProject(ProjectEntity project) {
 		

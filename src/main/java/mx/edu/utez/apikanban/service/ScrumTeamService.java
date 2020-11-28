@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import mx.edu.utez.apikanban.entity.ProjectEntity;
 import mx.edu.utez.apikanban.entity.ScrumTeamEntity;
 import mx.edu.utez.apikanban.repository.ScrumTeamRepository;
 
@@ -15,8 +16,16 @@ public class ScrumTeamService {
 	private ScrumTeamRepository scrumTeamRepository;
 	
 		
-		public List<ScrumTeamEntity> getScrumTeamList(){
-			return scrumTeamRepository.findAll();
+		public List<ScrumTeamEntity> getScrumTeamList(Long idProject){
+			ProjectEntity project = new ProjectEntity();
+			project.setId(idProject);
+			return scrumTeamRepository.findAllByProject(project );
+		}
+		
+		public List<ScrumTeamEntity> getByRolFromAProject(int rol, Long idProject) {
+			ProjectEntity project = new ProjectEntity();
+			project.setId(idProject);
+			return scrumTeamRepository.findByRolAndProject(rol, project);
 		}
 		
 		
